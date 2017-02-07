@@ -1,0 +1,590 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css"/>
+    
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+            body{
+                background-color: #ddd;
+                padding:20px;
+            }
+
+            .reday{
+
+                border: 3px solid grey;
+                border-radius: 10px 10px 20px 20px;
+                -webkit-box-shadow: inset -12px -22px 148px 0px rgba(0,0,0,0.48);
+                -moz-box-shadow: inset -12px -22px 148px 0px rgba(0,0,0,0.48);
+                box-shadow: inset -12px -22px 148px 0px rgba(0,0,0,0.48);
+            }
+
+            .navbar-collapse.in,
+            .navbar-collapse.collapsing
+            {
+            clear: left;
+            }
+
+            .imgB {
+           background-image:url("http://turbo.premiumpixels.com/wp-content/uploads/2012/05/preview4.jpg");
+           background-size: 100% 100%;
+           width:100%;
+           opacity: 0.9;
+           filter: alpha(opacity=50);
+            }
+            .imgB:hover {
+           opacity: 1.0;
+           filter: alpha(opacity=100);
+            }
+
+            .FontB {
+                /*color: rgba(10,60,150, 0.8);*/
+                text-shadow: 1px 4px 6px black;
+            }
+
+            .button {
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        position: relative;
+        background:#45238b ; /*#595900*/
+        padding: 10px 15px;
+        color: white;
+        box-shadow: 0 2px black;
+        text-decoration: none;
+        border-radius: 5px;
+        text-shadow: 0 1px 1px black;
+        font-size: 1.35em;
+    }
+
+            .sizeUp:hover {
+                font-size:1.8em;
+            }
+            .bc {
+
+            background-color:#606060;}
+
+            .bef.button {
+            padding: 0px 0px;
+            font-size: 1.35em;
+            border-radius: 0px;
+            }
+
+            .imgH:hover {
+                border:2px solid #ddd;
+            }
+
+            .items {
+        overflow: hidden; /* simple clearfix */
+    }
+    .items .item {
+        float: left;
+        width: 20%;
+      box-sizing: border-box;
+      background: #e0ddd5;
+      color: #171e42;
+      padding: 20px;
+      border:1px solid grey;
+    }
+
+        .item {
+        -webkit-box-shadow: inset 10px 10px 71px 6px rgba(197,209,175,1);
+-moz-box-shadow: inset 10px 10px 71px 6px rgba(197,209,175,1);
+box-shadow: inset 10px 10px 71px 6px rgba(197,209,175,1);
+        }
+
+    /**/
+#nav {
+    list-style:none;
+    margin: 0px;
+    padding: 0px;
+}
+#nav > li {
+    float: left;
+    margin-right: 20px;
+    font-size: 14px;
+    font-weight:bold;
+}
+#nav li a {
+    color:#333333;
+    text-decoration:none
+}
+#nav li a:hover {
+    color:#006699;
+    text-decoration:none
+}
+#notification_li {
+    position:relative;
+}
+#notificationContainer {
+    background-color: #fff;
+    border: 1px solid rgba(100, 100, 100, .4);
+    -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+    overflow: visible;
+    position: absolute;
+    top: 30px;
+    margin-left: -170px;
+    width: 400px;
+    z-index: -1;
+    display: none;
+    font-size:0.80em;
+}
+#notificationContainer:before {
+    content:'';
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    color: transparent;
+    border: 10px solid black;
+    border-color: transparent transparent white;
+    margin-top: -20px;
+    margin-left: 188px;
+}
+#notificationTitle {
+    font-weight: bold;
+    padding: 8px;
+    font-size: 13px;
+    text-align:center;
+    background-color: #ffffff;
+    position: absolute;
+    z-index: 1000;
+    width: 384px;
+    border-bottom: 1px solid #dddddd;
+}
+#notificationsBody {
+    padding: 33px 0px 0px 0px !important;
+
+}
+#notificationFooter {
+    background-color: #e9eaed;
+    text-align: center;
+    font-weight: bold;
+    padding: 8px;
+    font-size: 12px;
+    border-top: 1px solid #dddddd;
+}
+.notification_count {
+    padding: 3px 7px 3px 7px;
+    background: #cc0000;
+    color: #ffffff;
+    font-weight: bold;
+    margin-left: 7px;
+    border-radius: 9px;
+    -moz-border-radius: 9px;
+    -webkit-border-radius: 9px;
+    position: absolute;
+    margin-top: -11px;
+    font-size: 11px;
+    box-shadow: 0 1px black;
+}
+        #spn1 {
+        padding: 3px 7px 3px 7px;
+    background: #56c4be;
+    color: #ffffff;
+    font-weight: bold;
+    margin-left: 7px;
+    border-radius: 9px;
+    -moz-border-radius: 9px;
+    -webkit-border-radius: 9px;
+    position: absolute;
+    margin-top: -11px;
+    font-size: 11px;
+    box-shadow: 0 2px black;
+        }
+
+.notifications ul {
+    list-style-type: none;
+    display: inline-block;
+    
+}
+.notifications ul li {
+    display: block;
+    padding: 4px;
+}
+
+        ._down {
+        position:relative;
+        bottom:0px;
+        left:0px;
+        background-color:none;
+        border:0px solid black;
+        height:150px;
+        width:100%;
+        }
+
+        #horizontal-style {
+    display: table;
+    width: 100%;
+    /*table-layout: fixed;*/
+}
+#horizontal-style li {
+    display: table-cell;
+    
+}
+#horizontal-style a {
+    display: block;
+    border: 1px solid #ddd;
+    text-align: center;
+    margin: 0 0px;
+    background: none;
+    height:150px;
+}
+
+#horizontal-style li.span_down {
+        bottom:0px;
+        position:relative;
+        left:0px;
+        }
+
+        .inside_jumbotron {
+        font-family: 'Lucida Bright', Georgia, serif;font-size:2.5em; text-align:center;vertical-align:middle; display:table-cell;
+        text-shadow: 1px 4px 6px #a3cba4;
+        color:#2ba431;
+        -webkit-text-stroke-width: 2px;
+        -webkit-text-stroke-color: black;
+        font-weight:bold;
+        }
+
+        #notificationsBody ul li {
+        background-color:none;
+        }
+
+        #notificationsBody ul li:hover {
+        background-color:#eeeeee;
+        }
+
+        /**/
+
+    </style>
+    @*<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>*@
+</head>
+<body>
+
+    <div class="reday">
+
+        
+
+        <div class="navbar navbar-default" style="border-radius:20px 20px 0px 0px;">
+            <div class="container">
+
+                @*<div class="navbar-header pull-left">
+                    <a class="navbar-brand" href="index.php">xxx</a>
+                </div>*@
+                
+                <div class="navbar-header pull-right">
+                    <button type="button" class="navbar-toggle"
+                            data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @if (@Session["UserName"] != null)
+                        {
+                    <p class="navbar-text" style="border:0px solid #ddd;">
+                        
+                        <span class="bef button" style="background-color:lightgrey;color:grey;"><b> @Session["UserName"] </b></span>
+                        @Html.ActionLink("Logout", "Logout", "Home")
+                        <span style="color:red;">/</span><span class="pop"><b>@Html.ActionLink("Cart", "Cart", "ShoppingCart")  <i class="glyphicon glyphicon-shopping-cart"></i><span id="spn1" class="blue">@Session["CountItems"]</span></b></span>
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="navbar-text" style="border:0px solid #ddd;">
+
+                            <span style="background-color:none;"><b> @Html.ActionLink("Sign In", "Login", "Home")</b></span>
+                            @*<span style="background-color:none;"><b> /@Html.ActionLink("Cart", "Cart", "ShoppingCart")</b></span>*@
+                        </p>
+                    }
+                </div>
+                
+
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        @if ((string)@Session["UserName"] == "admin")
+                        {
+                            @*<li>@Html.ActionLink("Categories", "Categories", "Muser")</li>
+    <li>@Html.ActionLink("Products", "PrdouctsPage", "Products")</li>
+    <li>@Html.ActionLink("Users", "Index", "Muser")</li>
+    <li>@Html.ActionLink("Show All", "ShowAllProducts", "Products")</li>*@
+                            <li>
+                                <img src="https://lh6.googleusercontent.com/-nFMb34pWJu0/AAAAAAAAAAI/AAAAAAAAAAw/4okx_1JbvmM/photo.jpg"
+                                     style="width:50px;height:100%;border-radius:20px;border:2px solid gold;" />
+                            </li>
+                            <li>@Html.ActionLink("Control Panel", "UserDashBoard2", "Home")</li>
+                            @*<li style="color:#f37777;">@Html.ActionLink("Open Account", "Create", "Muser")</li>*@
+                            @*<li>@Html.ActionLink("Sign In", "Create", "Muser")</li>*@
+                        }
+                        else if (@Session["UserName"] == null)
+                        {
+                            if (ViewBag.Title == "Create")
+                            { }
+                            else
+                            {
+                            <li style="color:#f37777;">@Html.ActionLink("Registration", "Create", "Muser")</li>
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                    <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
+                                         style="width:50px;height:100%;border-radius:20px;border:2px solid #606060;" />
+                                </li>
+                            <li>@Html.ActionLink("DashBoard", "UserDashBoard", "Home")</li>
+
+
+                        }
+                        @if (@Session["UserName"] != null && (string)@Session["UserName"] != "admin") {
+                        <li style="padding:15px;">
+                            <ul id="nav">
+
+                                <li id="notification_li">
+                                    <a href="#" id="notificationLink">
+                                        <span>orders </span>
+                                        <span class="notification_count">@Session["CountOrders"]</span>
+
+                                        <i class="fa fa-bell"></i>
+                                    </a>
+
+                                    <div id="notificationContainer">
+                                        <div id="notificationTitle">All Orders</div>
+                                        <div id="notificationsBody" class="notifications">
+                                            <ul>
+                                                @*<li>Message 1</li>
+                                <li>Message 2</li>
+                                <li>Message 3</li>
+                                <li>Message 4</li>
+                                <li>Message 5</li>*@
+                                            </ul>
+                                        </div>
+                                        <div id="notificationFooter">
+                                            <a href="#" id='AddNew'>See All</a>
+
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        }
+
+</ul>
+                </div>
+
+                
+
+            </div>
+        </div>
+
+        @if (ViewBag.Title == "ShowAllProducts" || ViewBag.Title == "Cart" || ViewBag.Title == "UserDashBoard2"  || ViewBag.Title == "CheckOut")
+        {
+            //
+        }
+        else
+        {
+        <div class="jumbotron imgB" style="display:table;">
+            <span class="inside_jumbotron" >ATS COMPUTRES STORE</span>
+            <p class="lead FontB" style="color:white;text-align:center;font-size:1.6em;"><span class="btn btn-primary active" style="font-size:1.2em;">Best Shop In </span><span class="btn btn-default active" style="font-size:1.2em;">Town</span></p>
+        <div class="_down">
+            @*<ul class="list-inline">
+            <li>item1</li>
+                <li>item2</li>
+                <li>item3</li>
+                <li>item4</li>
+            </ul>*@
+            <ul id="horizontal-style">
+                @*@foreach (var m in (IEnumerable<MProduct>)ViewData["Products_to"])*@
+                 @if (Session["UserName"] == null)
+                 {
+                     var newProductsArray = (IEnumerable<MProduct>)ViewData["Products_to"]; int i = 0;
+                     foreach (var m in newProductsArray)
+                     {
+
+                         // for (int i = 0; i < m.ProductName.Count(); i++)
+                         // {
+                         i++;
+                         //while (i < 5) {
+                    <li style="background-size: 100% 100%;background-image:url(@m.ProductIamge.ToString());"><a href="#"><span class="badge">@m.ProductName</span></a><span class="btn btn-danger span_down" style="font-size:0.65em;">purchase now&nbsp;<i class="glyphicon glyphicon-shopping-cart"></i></span></li>
+                    if (i == 5) { break; }
+                    //}
+                    //}
+
+                    }
+
+                 }
+            </ul>
+        </div>
+        </div>
+            
+        }
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - ATS Application</p>
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+
+
+        </div>
+
+    <script type="text/javascript">
+    //$(document).ready(function () {
+    $("#notificationLink").click(function () {
+        $("#notificationContainer").fadeToggle(300);
+    $(".notification_count").fadeOut("slow");
+    $('#notificationLink > i.fa-bell').addClass('fa-bell-o');
+    $('#notificationLink > i.fa-bell').removeClass('fa-bell');
+    return false;
+    });
+
+    //Document Click hiding the popup
+    $(document).click(function () {
+        $("#notificationContainer").hide();
+    });
+
+    //Popup on click
+    $("#notificationContainer").click(function () {
+    return false;
+    });
+
+    $(function () {
+
+        //var DivInside2 = $('span.notification_count');
+        //DivInside2.append("222");
+
+    $('#AddNew').one('click', function(e){
+    //$('#notificationsBody ul').append('<li>New Message</li>');
+        e.preventDefault();
+        var some_ID = '@Session["UserID"]';
+        $.ajax({
+            //cache: false,
+            type: "post",
+            contentType: "application/json; charset=utf-8",
+            url: "/Home/Implement_Orders/",
+            dataType: "json",
+            data: JSON.stringify({ id: some_ID }),
+            success: function (data) {
+                //var result = "";
+                //alert("good");
+                var DivInside = $('#notificationsBody ul');
+                
+                var countItems = 0;
+                var dateFormat,ret;
+                /**/
+                //DivInside.html('');
+
+                $.each(data, function (index, od) {
+                    dateFormat = new Date(parseInt(od.OrderDate.substr(6)));
+                    ret = dateFormat.getMonth() + 1 + "/" + dateFormat.getDate() + "/" + dateFormat.getFullYear();
+                    countItems++;
+                    DivInside.append("<li><table class='table'><tr><th>&#x02913;</th><th>ID</th></th><th>OrderName</th><th>OrderQuantity</th><th>OrderDate</th></tr><tr>" +
+                        "<td style='color:red;'>" + countItems + "</td>" +
+                        "<td>" + od.OrderID + "</td>" +
+                        "<td>" + od.OrderName + "</td>" +
+                        "<td>" + od.OrderQuantity + "</td>" +
+                        "<td>" + ret + "</td>" +
+                        "</tr></table></li>");
+                });
+                
+                
+
+                /**/
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Failed to retrieve orders.');
+            }
+        });
+
+        //$(this).text('. . .');
+
+        $(this).html("<span class='glyphicon glyphicon-ok'></span>");
+    });
+
+        
+    });
+
+        //$('.btn-danger').click(function () {
+        //    alert('You must Login first :)');
+        //});
+
+
+        var alertUniqueId = (Math.floor((Math.random() * 9999999) + 1)).toString();
+        window.alert = function (message) {
+            if ($("#" + alertUniqueId).length == 0) {
+                var dialog = document.createElement('div');
+                dialog.classList.add('modal');
+                dialog.classList.add('fade');
+                dialog.id = alertUniqueId;
+
+                var modalDialog = document.createElement('div');
+                modalDialog.classList.add('modal-dialog');
+                dialog.appendChild(modalDialog);
+
+                var modalContent = document.createElement('div');
+                modalContent.classList.add('modal-content');
+                modalDialog.appendChild(modalContent);
+
+                var closeX = document.createElement('button');
+                closeX.classList.add('close');
+                closeX.setAttribute('data-dismiss', 'modal');
+                closeX.setAttribute('type', 'button');
+                closeX.innerHTML = '&times;';
+
+                var title = document.createElement('h4');
+                title.classList.add('modal-title');
+                title.innerHTML = 'Alert';
+
+                var modalHeader = document.createElement('div');
+                modalHeader.classList.add('modal-header');
+                modalHeader.appendChild(closeX);
+                modalHeader.appendChild(title);
+
+                var modalBody = document.createElement('div');
+                modalBody.classList.add('modal-body');
+                var dialogText = document.createTextNode(message);
+                modalBody.appendChild(dialogText);
+
+                var closeButton = document.createElement('button');
+                closeButton.setAttribute('type', 'button');
+                closeButton.setAttribute('data-dismiss', 'modal');
+                closeButton.classList.add('btn');
+                closeButton.classList.add('btn-primary');
+                closeButton.innerHTML = "OK";
+
+                var modalFooter = document.createElement('div');
+                modalFooter.classList.add('modal-footer');
+                modalFooter.appendChild(closeButton);
+
+
+                modalContent.appendChild(modalHeader);
+                modalContent.appendChild(modalBody);
+                modalContent.appendChild(modalFooter);
+
+                document.body.appendChild(dialog);
+            }
+            else {
+                $("#" + alertUniqueId + " .modal-body").text(message);
+            }
+            $("#" + alertUniqueId).modal('show');
+        }
+
+
+        $(document).ready(function () {
+            $(".btn-danger").click(function () {
+
+                alert("You must Login first ");
+            });
+        });
+
+    //});
+    </script>
+
+</body>
+</html>

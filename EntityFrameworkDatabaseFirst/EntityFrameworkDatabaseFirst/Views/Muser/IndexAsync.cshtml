@@ -1,0 +1,22 @@
+﻿@model IEnumerable<EntityFrameworkDatabaseFirst.MUser>
+
+@{
+    ViewBag.Title = "IndexAsync";
+}
+
+<h2>IndexAsync</h2>
+
+
+<table class="table" border="1" cellpadding="6">
+   
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.FirstName
+        </td>
+        
+    </tr>
+}
+
+</table>

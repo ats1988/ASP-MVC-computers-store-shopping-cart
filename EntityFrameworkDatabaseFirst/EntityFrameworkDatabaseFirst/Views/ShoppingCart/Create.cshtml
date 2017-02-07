@@ -1,0 +1,178 @@
+﻿@model EntityFrameworkDatabaseFirst.MOrder
+
+@{
+    ViewBag.Title = "Create";
+}
+@using EntityFrameworkDatabaseFirst.Controllers
+
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @*<h4>MOrder</h4>*@
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.OrderID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OrderID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OrderID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.OrderName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OrderName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OrderName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrderDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OrderDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OrderDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrderQuantity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OrderQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OrderQuantity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrderShipment, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OrderShipment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OrderShipment, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.OUserID, "OUserID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("OUserID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.OUserID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.OProductID, "OProductID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("OProductID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.OProductID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.OrderIamge, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OrderIamge, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OrderIamge, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+       
+
+
+
+        <div class="button">
+            <table class="table button" cellpadding="2" cellspacing="2" border="1">
+
+                <tr>
+                    @*<th>@Html.LabelFor(model => model.OrderID, htmlAttributes: new { @class = "control-label col-md-2" })</th>*@
+                    <th>@Html.LabelFor(model => model.OProductID, "OProductID", htmlAttributes: new { @class = "control-label col-md-2" })</th>
+                    <th>@Html.LabelFor(model => model.OUserID, "OUserID", htmlAttributes: new { @class = "control-label col-md-2" })</th>
+                    <th>@Html.LabelFor(model => model.OrderName, htmlAttributes: new { @class = "control-label col-md-2" })</th>
+                    @*<th>Price</th>*@
+                    <th>@Html.LabelFor(model => model.OrderQuantity, htmlAttributes: new { @class = "control-label col-md-2" })</th>
+                    @*<th>Sub Total</th>*@
+                </tr>
+@if (Session["cart"] != null)
+{
+                foreach (Item item in (List<Item>)Session["cart"])
+                {
+                    //s += Convert.ToDecimal(item.Product.ProductPrice * item.Quantity);
+
+                    <tr>
+   @* <td>
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OrderID, new { htmlAttributes = new { @class = "form-control" ,  @disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.OrderID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </td>*@
+                    <td>
+                        <div class="form-group">
+                            
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.OProductID, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @Value = @item.Product.ProductID } })
+                                @Html.ValidationMessageFor(model => model.OProductID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
+                    <td> @*@item.Product.UserID*@ 
+                        
+                        <div class="form-group">
+
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.OUserID, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @Value = @Convert.ToInt32(Session["UserID"].ToString()) } })
+                                @Html.ValidationMessageFor(model => model.OUserID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        
+                        </td>
+                    <td>
+                        <div class="form-group">
+                            
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.OrderName, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @Value = @item.Product.ProductName } })
+                                @Html.ValidationMessageFor(model => model.OrderName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        </td>
+                    @*<td><span class="badge">$ @item.Product.ProductPrice</span></td>*@
+        <td><div class="form-group">
+        <div class="col-md-10">
+        @Html.EditorFor(model => model.OrderQuantity, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @Value = @item.Quantity } })
+        @Html.ValidationMessageFor(model => model.OrderQuantity, "", new { @class = "text-danger" })
+        </div>
+        </div>
+        </td><td>
+                 <div class="form-group">
+                     <div class="col-md-offset-2 col-md-10">
+                         <input type="submit" value="Confirmed Deal" class="btn btn-default" />
+                     </div>
+                 </div>
+                        </td>
+                    @*<td><span style="background:#a3bd6c;" class="badge">$ @(item.Product.ProductPrice * item.Quantity)</span></td>*@
+                    </tr>
+                }
+}
+else {
+<tr><td class="alert-danger">CART STILL EMPTY</td></tr>
+}
+            </table>
+
+            @*<div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Confirmed Deal" class="btn btn-default" />
+                </div>
+            </div>*@
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Cart", "Cart")
+</div>

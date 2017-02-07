@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewBag.Title = "Cart";
+}
+@using EntityFrameworkDatabaseFirst.Controllers
+
+
+
+        <h2>Cart</h2>
+
+        <table class="table button" cellpadding="2" cellspacing="2" border="1">
+            @if (Session["cart"] != null)
+            {
+                ViewData["_start"] = "<< Continue Shopping";
+                <tr>
+                    <th>Optional</th>
+                    <th>Id</th>
+                    <th>user Id</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Sub Total</th>
+                </tr>
+                decimal s = 0;
+                foreach (Item item in (List<Item>)Session["cart"])
+                {
+                    s += Convert.ToDecimal(item.Product.ProductPrice * item.Quantity);
+                    //Session["CountItems"] = (int)Session["CountItems"] + 1;
+                    <tr>
+                        <td>@Html.ActionLink("Delete", "Delete", "ShoppingCart", new { id = item.Product.ProductID }, FormMethod.Get)</td>
+                        <td>@item.Product.ProductID</td>
+                        <td> @*@item.Product.UserID*@  @Convert.ToInt32(Session["UserID"].ToString())</td>
+                        <td>@item.Product.ProductName</td>
+                        <td><span class="badge">$ @item.Product.ProductPrice</span></td>
+                        <td>@item.Quantity</td>
+                        <td><span style="background:#a3bd6c;" class="badge">$ @(item.Product.ProductPrice * item.Quantity)</span></td>
+                    </tr>
+                }
+                <tr>
+                    <td align="right" colspan="6"><span style="background:#517424;" class="badge">Total</span></td>
+                    <td><span style="background:#517424;" class="badge">$ @s</span></td>
+                </tr>
+            }
+            else
+            {
+                @*@ViewData["_start"] = "Start Your SHOPPINGS";*@
+                <tr>
+                    <td>Cart Is Empty</td>
+                </tr>
+
+            }
+            @if ((int)Session["CountItems"] == 0)
+            {
+                ViewData["_start"] = "< Start Your SHOPPINGS";
+            }
+        </table>
+        @*"Continue Shopping"*@
+        <span class="button" style="background:#ddd;">@Html.ActionLink((string)ViewData["_start"], "ShowAllProducts", "Products")</span>
+        &nbsp;
+
+        <button>click for JSON</button>
+
+        @if ((int)Session["CountItems"] != 0)
+        {
+            <span class="button" style="background:#ddd;">@Html.ActionLink("Check Out >>", "CheckOut2", "ShoppingCart")</span>
+
+        }
+
+<br /><br />
+
+<div id="panelThatSlides" style="display:none;background:#eee;padding:10px;">
+    <div id="contentThatFades" style="display:none;background:#fff;padding:10px;">
+        <table class="table" id="ulList" cellpadding="2" cellspacing="2" border="1"></table>
+    </div>
+</div>
+
+
+
+@section scripts {
+    <script>
+
+        $(function () {
+            $('button').one("click", function (e) {
+                e.preventDefault();
+                //var product = { ProductName: "Go Freelancer" };
+                $.ajax({
+                    type: "Post",
+                    //contentType: "application/json; charset=utf-8",
+                    //data: "{it:" + JSON.stringify(product) + "}",
+                    url: "/ShoppingCart/ListAll/",
+                    dataType: "json",
+                    //cache: false,
+                    success: function (data) {
+                        var ul = $("#ulList");
+                        ul.append("<tr><th>Product Name</th><th>Price</th></tr>");
+
+                        if ($("#panelThatSlides").is(":visible")) {
+                            $("#contentThatFades").fadeOut(600, function () {
+                                $("#panelThatSlides").slideUp();
+                            });
+                        }
+                        else {
+                            $("#panelThatSlides").slideDown(1000, function () {
+                                $("#contentThatFades").fadeIn();
+                            });
+                        }
+
+
+                        $(data).each(function (index, usr) {
+
+                            var array1 = usr.Product.ProductName;
+                            var array2 = usr.Product.ProductPrice;
+                            ul.append("<tr><td class='btn btn-warning'>" + array1 + "</td><td>" + array2 + "</td></tr>");
+
+
+                            //alert("nothing");
+
+                        });
+
+                    }
+                });
+            });
+        });
+        //$(document).ready(function () {
+        //    $(".jumbotron").hide();
+        //});
+
+    </script>
+
+
+}

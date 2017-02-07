@@ -1,0 +1,25 @@
+﻿@model EntityFrameworkDatabaseFirst.MUser
+
+@{
+    ViewBag.Title = "UserDashBoard";
+}
+
+<h2>UserDashBoard</h2>
+
+<div class="button" style="background-color:#4c7d00;">
+    <fieldset>
+        @*<legend> User DashBoard </legend>*@
+        @if (Session["UserName"] != null)
+        {
+            <text> Welcome <span class="badge"> @Session["UserName"].ToString() </span> </text>
+            <div class="button" style="text-align:center;background:#c7c77c;">
+
+                <span style="background-color:none;"><b> <span class="glyphicon glyphicon-shopping-cart"></span>@Html.ActionLink("Cart Page", "Cart", "ShoppingCart")</b></span>
+            </div>
+            <div class="button" style="text-align:center;background:#c7c77c;">
+
+                <span style="background-color:none;"><b> <span class="glyphicon glyphicon-th"></span>@Html.ActionLink("Products Page", "ShowAllProducts", "Products")</b></span>
+            </div>
+        }
+    </fieldset>
+</div>

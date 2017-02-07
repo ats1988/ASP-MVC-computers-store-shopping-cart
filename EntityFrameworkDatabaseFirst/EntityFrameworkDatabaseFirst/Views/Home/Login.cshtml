@@ -1,0 +1,60 @@
+﻿@model EntityFrameworkDatabaseFirst.MUser
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <div class="button" style="background-color:#345600;">
+        <fieldset>
+            <legend>@Html.ActionLink("Register Here", "Create", "Muser")</legend>
+
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @if (@ViewBag.Msssage != null)
+            {
+                <div style="border:1px solid red;">
+                    @ViewBag.Message
+                </div>
+            }
+            <table>
+                <tr>
+                    <td>
+                        @Html.LabelFor(a => a.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.FirstName, new { @class = "form-control", placeholder = "UserName", @type = "text" })
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(a => a.FirstName, "", new { @class = "alert-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(a => a.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.Password, new { @class = "form-control", placeholder = "Password", @type = "password" })
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(a => a.Password, "", new { @class = "alert-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Login" />
+                    </td>
+                    <td></td>
+                </tr>
+
+            </table>
+        </fieldset>
+    </div>
+   
+}

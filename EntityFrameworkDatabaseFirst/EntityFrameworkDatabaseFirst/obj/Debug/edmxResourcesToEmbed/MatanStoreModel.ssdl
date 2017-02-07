@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HR14Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" />
+  </EntityType>
+  <EntityType Name="MOrders">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="OrderDate" Type="date" />
+    <Property Name="OrderQuantity" Type="nvarchar" MaxLength="50" />
+    <Property Name="OrderShipment" Type="nvarchar" MaxLength="100" />
+    <Property Name="OUserID" Type="int" Nullable="false" />
+    <Property Name="OProductID" Type="int" Nullable="false" />
+    <Property Name="OrderIamge" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="MProducts">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProdcutQuantity" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProductPrice" Type="decimal" Precision="16" Scale="2" />
+    <Property Name="ProductDate" Type="date" />
+    <Property Name="ProductIamge" Type="nvarchar" MaxLength="200" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <EntityType Name="MUsers">
+    <Key>
+      <PropertyRef Name="MUserID" />
+    </Key>
+    <Property Name="MUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="HR14ModelStoreContainer">
+    <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MOrders" EntityType="Self.MOrders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MProducts" EntityType="Self.MProducts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MUsers" EntityType="Self.MUsers" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

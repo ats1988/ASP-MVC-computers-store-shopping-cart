@@ -1,0 +1,39 @@
+﻿@model IEnumerable<EntityFrameworkDatabaseFirst.MProduct>
+
+@{
+    ViewBag.Title = "ShowAllProducts";
+}
+
+<h2>ShowAllProducts</h2>
+
+
+
+ 
+<div class="items button" style="background:#6a6a6a;">
+    @foreach (var item in Model)
+    {
+        @*<a href="#">*@
+            <div class="item" style="background:none;border:2px solid grey;">
+                <div class="clearfix">
+                    <div class="btn-group inline pull-left"><span class="badge">@Html.DisplayFor(modelItem => item.ProductName)</span></div>
+                    <div class="btn-group inline pull-right"><span class="badge">$ @Html.DisplayFor(modelItem => item.ProductPrice)</span> 
+                    </div>
+                    </div>
+                <div class="btn-group inline pull-right">
+                    <img class="" src="@Html.DisplayFor(modelItem => item.ProductIamge)" style="height:100%;width:200px;" />
+                </div>
+                <div class="btn-group inline pull-right">
+                    <span>@Html.ActionLink("Order Now", "OrderNow","ShoppingCart",new {id = item.ProductID },FormMethod.Get)</span>
+                </div>
+                </div>
+        @*</a>*@
+    }
+
+            </div>
+
+@section scripts{
+    <script type="text/javascript">
+        //$(".jumbotron").hide();
+
+    </script>
+    }
